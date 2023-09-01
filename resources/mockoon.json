@@ -1,0 +1,240 @@
+{
+    "uuid": "c87cfc6d-3441-4e87-87e5-8f51e1c893f4",
+    "lastMigration": 28,
+    "name": "GPM React Native",
+    "endpointPrefix": "",
+    "latency": 0,
+    "port": 3000,
+    "hostname": "",
+    "folders": [],
+    "routes": [
+        {
+            "uuid": "2af3d26f-a227-40be-a828-c5a38f0e4812",
+            "type": "http",
+            "documentation": "Login Route",
+            "method": "post",
+            "endpoint": "login",
+            "responses": [
+                {
+                    "uuid": "c911ce53-07fa-4280-9a35-638f1bc615de",
+                    "body": "{\n  \"token\": \"ee977806d7286510da8b9a7492ba58e2484c0ecc\",\n  \"user\" : {\n    \"name\": \"Jose das neves\",\n    \"email\": \"jose.neves@gpmsolucoes.com\",\n    \"role\": \"admin\"\n  }\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "Response for authenticated user. ",
+                    "headers": [
+                        {
+                            "key": "",
+                            "value": ""
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "email",
+                            "value": "jose.neves@gpmsolucoes.com",
+                            "invert": false,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "password",
+                            "value": "gpm@123654",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "AND",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id"
+                },
+                {
+                    "uuid": "ad581edb-30bb-480d-ac97-0149330e7be6",
+                    "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                    "latency": 0,
+                    "statusCode": 401,
+                    "label": "",
+                    "headers": [],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "email",
+                            "value": "jose.neves@gpmsolucoes.com",
+                            "invert": true,
+                            "operator": "equals"
+                        },
+                        {
+                            "target": "body",
+                            "modifier": "password",
+                            "value": "gpm@123654",
+                            "invert": true,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id"
+                }
+            ],
+            "enabled": true,
+            "responseMode": null
+        },
+        {
+            "uuid": "5ef1c6cb-a525-40fc-af57-c2a83632b1b0",
+            "type": "http",
+            "documentation": "Logout Route",
+            "method": "post",
+            "endpoint": "logout",
+            "responses": [
+                {
+                    "uuid": "8210ae94-4034-40cf-9872-7ea6495dc2a6",
+                    "body": "{\n  \"message\": \"User logout successfully\"\n}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer ee977806d7286510da8b9a7492ba58e2484c0ecc",
+                            "invert": false,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id"
+                },
+                {
+                    "uuid": "b76a7b42-ced9-45e5-b9ba-02f8f0591436",
+                    "body": "{\n \"message\": \"Failed at logout, try again.\" \n}",
+                    "latency": 0,
+                    "statusCode": 400,
+                    "label": "",
+                    "headers": [],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "header",
+                            "modifier": "Authorization",
+                            "value": "Bearer ee977806d7286510da8b9a7492ba58e2484c0ecc",
+                            "invert": true,
+                            "operator": "equals"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id"
+                }
+            ],
+            "enabled": true,
+            "responseMode": null
+        },
+        {
+            "uuid": "c55a556d-b523-4f08-b04d-3dcfff47a64c",
+            "type": "crud",
+            "documentation": "",
+            "method": "",
+            "endpoint": "products",
+            "responses": [
+                {
+                    "uuid": "86b1f48b-8009-4361-976b-3c2cbafa94e7",
+                    "body": "{}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [],
+                    "bodyType": "DATABUCKET",
+                    "filePath": "",
+                    "databucketID": "buoj",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id"
+                }
+            ],
+            "enabled": true,
+            "responseMode": null
+        }
+    ],
+    "rootChildren": [
+        {
+            "type": "route",
+            "uuid": "2af3d26f-a227-40be-a828-c5a38f0e4812"
+        },
+        {
+            "type": "route",
+            "uuid": "5ef1c6cb-a525-40fc-af57-c2a83632b1b0"
+        },
+        {
+            "type": "route",
+            "uuid": "c55a556d-b523-4f08-b04d-3dcfff47a64c"
+        }
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+        "enabled": false,
+        "type": "CERT",
+        "pfxPath": "",
+        "certPath": "",
+        "keyPath": "",
+        "caPath": "",
+        "passphrase": ""
+    },
+    "cors": true,
+    "headers": [
+        {
+            "key": "Content-Type",
+            "value": "application/json"
+        }
+    ],
+    "proxyReqHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "proxyResHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "data": [
+        {
+            "uuid": "7a3a4f0e-fbcf-483a-9cf5-7cd11c47c57f",
+            "id": "buoj",
+            "name": "Products",
+            "documentation": "",
+            "value": "[\n  {{#repeat 10}}\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"{{faker 'commerce.productName'}}\",\n      \"description\": \"{{faker 'lorem.paragraph'}}\",\n      \"category\": \"{{faker 'commerce.department'}}\",\n      \"inStock\":{{faker 'datatype.number' min=0 max=25}},\n      \"createdAt\": \"{{faker 'date.past'}}\"\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]"
+        }
+    ]
+}
